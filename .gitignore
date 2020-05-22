@@ -129,3 +129,5 @@ yarn-error.log
 # End of https://www.gitignore.io/api/vue,node,vuejs
 
 .DS_Store
+
+RESTful-api-server/
