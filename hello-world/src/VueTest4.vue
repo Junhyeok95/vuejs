@@ -103,7 +103,7 @@
     <div v-show="count !== 0">      카운터가 0 아닐 경우</div>
 
     <!--
-      + v-if 는 조건에 따라 실제로 ㄷ렌더하고 제거한다.
+      + v-if 는 조건에 따라 실제로 렌더하고 제거한다.
       사용자에게 보이지 않는 DOM 엘리먼트까지 추가로 렌더링 하지 않아도 된다는 점이 장점이다.
       그러나 엘리먼트를 토글할 경우 실제로 렌더를 수행해야된다.
       v-show 디렉티브는 사용자에게 보이지 않는 DOM 엘리먼트라도 렌더가 되지만
@@ -113,6 +113,90 @@
         -> v-if 는 렌더링과 제거를 함, 토글시 불리함
         -> v-show 는 전체를 렌더링하고 , 스타일 속성만 변경하므로 토글시 유리함
     -->
+
+--------------------------------------------------
+
+    <!-- v-for -->
+    <!-- v-for -->
+    <!-- 변수 in 표현식 을 사용하며 표현식으로는 배열과 객체를 사용할 수 있다 -->
+    <div v-for="(item, index) in items" v-bind:key="index">
+      items 배열의 {{index}} 번째 요소의 값은 {{time}} 입니다.
+    </div>
+
+    <div v-for="(value, key, index) in object" v-bind:key="index">
+      object 객체의 {{index}} 번째 키인 {{key}} 값은  {{value}} 입니다.
+    </div>
+
+--------------------------------------------------
+
+    <!-- v-model -->
+    <!-- v-model -->
+    <!-- 폼 요소처럼 사용자의 입력을 받을 수 있는 요소에 양방향 데이터 바인딩을 생성할 수 있는 디렉티브다 -->
+    <input v-model="message">
+    <p>입력한 메시지 : {{message}}</p>
+    <p>100 같은 숫자를 입력하더라고 문자열 '100' 으로 해석하기 때문에 주의가 필요하다</p>
+
+    <!-- 단일체크박스는 선택 여부에 대한 하나의 불리언 값을 가짐 -->
+    <input type="checkbox" v-model="isChecked">
+
+    <!-- 여러 개의 체크박스 요소에 데이터를 바인딩한 모습 -->
+    <input type="checkbox" v-model="isCheckedValues" value="1">
+    <input type="checkbox" v-model="isCheckedValues" value="2">
+    <input type="checkbox" v-model="isCheckedValues" value="3">
+
+    <!--
+      + 집합의 성격을 가지므로 isCheckedValues 값은 배열이 된다.
+      바인딩할 데이터를 배열로 초기화하지 않는다면 데이터가 값의 집합이라고 판단하지 않고 ... 불리언 자료형으로 처리해버린다 !!!
+
+      export default {
+        data () {
+          return {
+            checkedValues: []
+          }
+        }
+      }
+      값의 집합으로 사용할 데이터를 빈 배열로 초기화한 모습
+
+      value 속성을 꼭 입력하도록 하자.
+    -->
+    
+--------------------------------------------------
+
+    <!-- 라디오 버튼과 셀렉트 요소는 반드시 하나만 선택 가능하기 때문에 선택된 버튼의 value를 값으로 가진다 -->
+    <input type="radio" v-model="selected" value="Evan">
+    <input type="radio" v-model="selected" value="Martin">
+
+    <select v-model="selected">
+      <option>Evan</option>
+      <option>Martin</option>
+    </select>
+
+    <!-- 단 ... 셀렉트 요소는 멀티플 속성을 사용가능하다 -->
+    <select v-model="selected" multiple>
+      <option>Evan</option>
+      <option>Martin</option>
+    </select>
+
+    <!-- 또한 라디오, 체크박스, 셀렉트 요소의 경우 기본적으로 문자열 또는 불리언 형의 값을 가지지만 ... ! v-bind 디렉티브를 사용하면 다양한 자료형의 값을 바인딩할 수도 있다. -->
+    <select v-model="selected" multiple>
+      <option :value="{ name: 'Evan' }">Evan</option>
+      <option v-bind:value="{ name: 'Martin '}">Martin</option>
+    </select>
+
+--------------------------------------------------
+
+    <!-- v-once -->
+    <!-- v-once -->
+    <!-- '한 번만' 렌더링 하도록 만들어주는 디렉티브다. 성능을 최적하하기에 도움을 준다 -->
+    <span v-once>{{ message }}</span>
+
+--------------------------------------------------
+
+    <!-- v-pre -->
+    <!-- v-pre -->
+    <!-- 하위 요소에 대한 모든 컴파일을 하지 않는다. 즉, Vue에서 제공해주는 보간법을 사용해도 템플릿 문법으로 인식하지 않고 ... 문자열 그대로 인식한다는 모습 -->
+    <span v-per>{{ message }}</span>
+    <!-- 결과값 -> {{ message }} 그대로 나옴, 렌더링 성능에 좋은 영향을 줄 수 있음 -->
 
 --------------------------------------------------
 
