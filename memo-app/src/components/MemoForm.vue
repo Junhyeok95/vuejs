@@ -1,11 +1,18 @@
 <template>
   <div class="memo-form">
     <!-- form 을 이용하여 사용자가 입력할 수 있는 필드를 추가 -->
-    <form action="">
+    <!-- form 의 submit 기본 동작을 방지 후, 선언한 addMemo 를 실행 -->
+    <form action="" @submit.prevent="addMemo">
       <fieldset>
         <div>
-          <input type="text" class="memo-form__title-form" placeholder="메모의 제목을 입력하세요" />
-          <textarea name="" id="" cols="30" rows="10" class="memo-form__content-form" placeholder="메모의 내용을 입력하세요" />
+          <!-- title 을 v-model 을 이용하여 연결 -->
+          <input
+            v-model="title"
+            type="text" class="memo-fo rm__title-form" placeholder="메모의 제목을 입력하세요" />
+          <!-- content 을 v-model 을 이용하여 연결 -->
+          <textarea
+            v-model="content"
+            name="" id="" cols="30" rows="10" class="memo-form__content-form" placeholder="메모의 내용을 입력하세요" />
           <button type="reset"><i class="fas fa-sync-alt"></i></button>
         </div>
         <button type="submit">등록</button>
@@ -16,7 +23,34 @@
 
 <script>
 export default {
-  name: 'MemoForm'
+  name: 'MemoForm',
+  data () {
+    return {
+      title: '',
+      content: ''
+    }
+  },
+  methods: {
+    addMemo () {
+      // 비구조화 할당
+      const {title, content} = this;
+      // 식별자
+      const id = new Date().getTime();
+      // 방어 코드
+      const isEmpty = title.length <= 0 || content.length <= 0;
+      if (isEmpty) {
+        return fasle;
+      }
+
+      // payload 로 사용자가 입력한 데이터를 입력
+      this.$emit('addMemo', {id, title, content});
+      this.resetFields();
+    },
+    resetFields () {
+      this.title = '';
+      this.content = '';
+    }
+  }
 }
 </script>
 
@@ -31,7 +65,7 @@ export default {
     padding: 24px;
     margin-bottom: 20px;
     box-shadow: 0 4px 10px -4px rgba(0, 0, 0, 0.2);
-    background-color: #FFFFFF;
+    background-color: #ffffff;
   }
   .memo-form form fieldset div button[type="reset"] {
     position: absolute;
