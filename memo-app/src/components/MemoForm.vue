@@ -31,6 +31,10 @@ export default {
     }
   },
   methods: {
+    resetFields () {
+      this.title = '';
+      this.content = '';
+    },
     addMemo () {
       // 비구조화 할당
       const {title, content} = this;
@@ -43,12 +47,8 @@ export default {
       }
 
       // payload 로 사용자가 입력한 데이터를 입력
-      this.$emit('addMemo', {id, title, content});
+      this.$emit('addMemo', { id, title, content });
       this.resetFields();
-    },
-    resetFields () {
-      this.title = '';
-      this.content = '';
     }
   }
 }
