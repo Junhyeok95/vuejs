@@ -1,0 +1,15 @@
+200 -> ok
+201 -> post ok
+204 -> delete ok ( 리턴 할 데이터가 없음 )
+
+400 -> Bad Request ( 잘못된 요청)
+401 -> Unauthorized ( login, 인증 필요 ) 
+403 -> Forbidden ( 접근 금지 )
+404 -> Not Found ( 없음 )
+405 -> Method not allowed ( 허용되지 않은 메소드 사용 )
+408 -> Request Timeout
+414 -> Request URI too long
+
+500 -> internal Server Error ( 예상하지 못헀던 에러 )
+503 -> Service Temporarily Unavailable ( 일시적으로 사용할 수 없음 )
+504 -> Gateway Timeout ( 게이트웨이 문제 )
