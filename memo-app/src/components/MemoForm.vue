@@ -36,18 +36,29 @@ export default {
       this.content = '';
     },
     addMemo () {
-      // 비구조화 할당
-      const {title, content} = this;
-      // 식별자
-      const id = new Date().getTime();
-      // 방어 코드
-      const isEmpty = title.length <= 0 || content.length <= 0;
-      if (isEmpty) {
-        return fasle;
-      }
+      // !! localStorage
+        // // 비구조화 할당
+        // const {title, content} = this;
+        // // 식별자
+        // const id = new Date().getTime();
+        // // 방어 코드
+        // const isEmpty = title.length <= 0 || content.length <= 0;
+        // if (isEmpty) {
+        //   return fasle;
+        // }
 
-      // payload 로 사용자가 입력한 데이터를 입력
-      this.$emit('addMemo', { id, title, content });
+        // // payload 로 사용자가 입력한 데이터를 입력
+        // this.$emit('addMemo', { id, title, content });
+        // this.resetFields();
+
+       // !! API
+      const { title, content } = this;
+      const isEmpty = title.length <= 0 || content.length <= 0;
+      // 방어코드
+      if (isEmpty) {
+        return false;
+      }
+      this.$emit('addMemo', { title, content });
       this.resetFields();
     }
   }
