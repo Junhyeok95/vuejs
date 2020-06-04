@@ -6,4 +6,5 @@
 
 ``` bash
 npm i -S axios
+npm i -S vuex
 ```
