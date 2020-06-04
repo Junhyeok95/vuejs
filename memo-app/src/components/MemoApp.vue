@@ -18,6 +18,7 @@ import MemoForm from './MemoForm';
 import Memo from './Memo';
 
 import axios from 'axios';
+import { mapActions, mapState } from 'vuex';
 
 const memoAPICore = axios.create({
   baseURL: 'http://localhost:8000/api/memos'
@@ -29,10 +30,16 @@ export default {
     MemoForm,
     Memo
   },
-  data () {
-    return {
-      memos: [],
-    };
+  // !! API
+  // data () {
+  //   return {
+  //     memos: [],
+  //   };
+  // },
+  computed: {
+    ...mapState([
+      'memos'
+    ])
   },
   created() {
     // !! localStorage
@@ -40,11 +47,13 @@ export default {
       // this.memos = localStorage.memos ? JSON.parse(localStorage.memos) : [];
     
     // !! API
-    memoAPICore.get('/')
-      .then(res => {
-        this.memos = res.data;
-      })
+      // memoAPICore.get('/')`
+      //   .then(res => {
+      //     this.memos = res.data;
+      //   })`
 
+    // !! vuex
+    this.fetchMemos();
   },
   // MemoForm 에서 submit 으로 emit 로 발생시킨 데이터를 받는다
   methods: {
@@ -113,7 +122,10 @@ export default {
           this.memos.splice(targetIndex, 1, { ...targetMemo, content });
         })
       
-    }
+    },
+    ...mapActions([
+      'fetchMemos'
+    ])
   },
 }
 </script>
