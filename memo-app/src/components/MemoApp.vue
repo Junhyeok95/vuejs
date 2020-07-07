@@ -8,7 +8,11 @@
         :key="memo.id"
         :memo_props="memo"
         @deleteMemo="deleteMemo"
-        @updateMemo="updateMemo"/>
+        @updateMemo="updateMemo"
+      　:editingId="editingId"
+        @setEditingId="SET_EDITING_ID"
+        @resetEditingId="RESET_EDITING_ID"
+      />
     </ul>
   </div>
 </template>
@@ -28,7 +32,8 @@ export default {
   name: 'MemoApp',
   components: {
     MemoForm,
-    Memo
+    Memo,
+    editingId
   },
   // !! API
   // data () {
@@ -127,7 +132,9 @@ export default {
       'fetchMemos',
       'addMemo', // mapActions 헬퍼 함수를 여기에 넣으면 원래있던 addMemo methods 에 있는건 오버라이딩 되어 실행되지 않을것
       'deleteMemo',
-      'updateMemo'
+      'updateMemo',
+      SET_EDITING_ID,
+      RESET_EDITING_ID
     ])
     // ,
     // addMemo () {

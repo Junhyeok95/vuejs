@@ -30,8 +30,8 @@ export default {
   name: 'Memo',
   props: {
     // 부모에게 받은 props를 등록 ..
-    memo_props: {
-      typo: Object
+    editing : {
+      type:Number
     }
   },
     // ========================= 디버깅용
@@ -47,10 +47,12 @@ export default {
       isEditing: false
     }
   },
+  
   methods: {
     deleteMemo () {
       // props 로 받은 memo_props 의 id 를 함수의 파라미터로 전달한다.
       const id = this.memo_props.id;
+      const id = this.memo.id;
       this.$emit('deleteMemo', id);
       // console.log(id);
     },
@@ -60,8 +62,9 @@ export default {
         // ========================= 디버깅용
           // console.log("handleDblClick => ", this.$refs.content);
           // this.$refs.content.focus();
-        // ========================= 디버깅용
+        // ========================= 디버깅용 
       // !! 우회하는 방법
+      this.$emit('setEfitingId', this.memo.iddf )
       this.$nextTick(() => {
         this.$refs.content.focus();
       });
@@ -73,10 +76,14 @@ export default {
         return false;
       }
       this.$emit('updateMemo', { id, content });
-      this.isEditing = false;
+      // this.isEditing = false;
+      this.$refs.content.blur();
     },
     handleBlur () {
-      this.isEditing = false;
+      // 컴퓨터의 isEditing 없에는 코드
+      // this.isEditing // 부모의 이벤트 리스너를 실행
+      // this.isEditing = false;
+      this.$emit('resetEditigId');
     }
   }
 }
@@ -89,7 +96,7 @@ export default {
     margin-bottom: 20px;
     padding: 24px;
     box-shadow: 0 4px 10px -4px rgba(0, 0, 0, 0.2);
-    background-color: #fff;
+    background-color: #ffFFFf;
     list-style: none;
   }
   .memo-item input[type="text"] {

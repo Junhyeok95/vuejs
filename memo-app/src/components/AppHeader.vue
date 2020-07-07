@@ -1,12 +1,19 @@
 <template>
   <div class="app-header">
-    <h1>메모 앱</h1>
+    <h1>메모 앱입니당</h1>
+    <p><strong>{{ getMemoCount }}</strong></p>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
   export default {
     name: 'AppHeader',
+    computed: {
+      ...mapGetters ([
+        'getMemoCount'
+      ])
+    }
   };
 </script>
 

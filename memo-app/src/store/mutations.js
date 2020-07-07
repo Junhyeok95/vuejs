@@ -3,7 +3,9 @@ import {
   FETCH_MEMOS,
   ADD_MEMO, // ADD_MEMO 상수 추가
   DELETE_MEMO, // 추가
-  EDIT_MEMO // UPDATE
+  EDIT_MEMO, // UPDATE
+  SET_EDITING_ID,
+  RESET_EDITING_ID
 } from './mutations-types';
 
 export default {
@@ -22,6 +24,16 @@ export default {
     const { id, content } = payload;
     const targetIndex = state.memos.findIndex(v => v.id === id);
     const targetMemo = state.memos[targetIndex];
+    state.memos.splice(targetIndex, 1, { ...targetMemo, content });
+  },
+  [SET_MEIIngId] (state, id) {
+    state.editingId = id;
+    state.memos.splice(targetIndex, 1, { ...targetMemo, content });
+  },
+  [RESET_EDITING_ID] (state) {
+    {
+      state.editingId = 0;
+    }
     state.memos.splice(targetIndex, 1, { ...targetMemo, content });
   },
 }; 
