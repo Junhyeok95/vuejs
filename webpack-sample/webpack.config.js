@@ -6,8 +6,14 @@ module.exports = {
   output: {
     // 결과물을 내보낼 위치
     path: path.resolve(__dirname, "js"),
+    publicPath: "/js/", // 번들링 한 결과물을 웹서버에서 배포할 기본 경로
     filename: "app.js",
   },
   // package.json -> scripts.test 삭제
   module: {},
+  devServer: {
+    // devServer에서 제공하는 자체 스크립트를 포함하고 메모리 상에 저장하고 자체 서버로 실행함
+    contentBase: path.resolve(__dirname, "html"), // 웹서버가 사용할 디렉토리
+    port: 9000,
+  },
 };

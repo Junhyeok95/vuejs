@@ -3,6 +3,7 @@
 ```
 npm i -D path
 npm i -D webpack webpack-cli
+npm i -D webpack-dev-server
 ```
 
 # webpack test
