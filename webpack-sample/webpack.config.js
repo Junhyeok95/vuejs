@@ -10,7 +10,15 @@ module.exports = {
     filename: "app.js",
   },
   // package.json -> scripts.test 삭제
-  module: {},
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        loader: ["style-loader", "css-loader"],
+      },
+    ],
+  },
   devServer: {
     // devServer에서 제공하는 자체 스크립트를 포함하고 메모리 상에 저장하고 자체 서버로 실행함
     contentBase: path.resolve(__dirname, "html"), // 웹서버가 사용할 디렉토리

@@ -4,6 +4,7 @@
 npm i -D path
 npm i -D webpack webpack-cli
 npm i -D webpack-dev-server
+npm i -D css-loader style-loader
 ```
 
 # webpack test
