@@ -1,9 +1,7 @@
 <template>
-  <div class="hello">
+  <div class="hello-world">
     <h1>{{ msg }}</h1>
     <h1>{{ name }}</h1>
-    <h1>{{ name }}</h1>
-    <h1>{{ age }}</h1>
     <h1>{{ age }}</h1>
   </div>
 </template>
